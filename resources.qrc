@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fnt/ATOMICCLOCKRADIO.TTF</file>
+        <file>fnt/Monospace.ttf</file>
+        <file>img/FN.png</file>
+        <file>img/SSTTF</file>
+        <file>img/SSTTF_backup.png</file>
+    </qresource>
+</RCC>
