@@ -11,7 +11,6 @@
 #include "ticc.h"
 #include "m12mt.h"
 #include "logger.h"
-//#include "SkyplotWidget.h"
 #include "qroundprogressbar.h"
 //
 namespace Ui {
@@ -53,6 +52,10 @@ private slots:
     void on_pbSurvey_clicked();
 
     void askGPS();
+
+    void on_pbShutdown_clicked();
+
+    void on_pbReboot_clicked();
 
 private:
     Ui::Dialog *ui;
@@ -118,6 +121,14 @@ private:
     double satdiff=0.0;
     //
     QRoundProgressBar* channels[12];
+    //
+    int curr_minute;
+    int prev_minute;
+    //
+    // Genera el proceso para hacer llamadas al sistema
+      QProcess *process;
+    //
+     bool GPS_AVA;
 };
 //
 #endif // DIALOG_H

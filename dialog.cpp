@@ -17,11 +17,9 @@
 #include <QtCharts/QLegend>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QStackedBarSeries>
-
-
-
+//
+//
 Logger *Dialog::logger;
-//SkyplotWidget *Dialog::skyplot;
 //
 QT_CHARTS_USE_NAMESPACE
 
@@ -55,15 +53,17 @@ Dialog::Dialog(QWidget *parent) :
     //
     // GPS
     //M12MT* gps=new M12MT();
-    gps->startGPS();
+    GPS_AVA=gps->startGPS();
     connect(gps,SIGNAL(gpsReady()),this,SLOT(update_Data()));
     //
-    if(gps->DEMOmode){
-       // connect(tic,SIGNAL(countReady()),this,SLOT(update_Data()));
-    }
-    else{
-        connect(tic,SIGNAL(countReady()),this,SLOT(askGPS()));
-    }
+   if(GPS_AVA){
+       connect(tic,SIGNAL(countReady()),this,SLOT(askGPS()));
+   }
+
+
+    // inicializo proceso
+    process=new QProcess(this);
+
 }
 //
 Dialog::~Dialog()
@@ -139,9 +139,10 @@ void Dialog::SaveData()
 {   //
     seconds=seconds+1;
     count_one+=c_count;
-    if (gps->GPStime.second()==59) //in this way i can lose a full minute, i need to check for minute change
+    curr_minute=gps->GPStime.minute();
+    //
+    if (curr_minute != prev_minute) // diferente minute
     {
-
         //  this flag is false unless a new file is started later in the routine
         QString oldname=namefile;
         QString extension="." + EXT;; // filename extension
@@ -212,6 +213,7 @@ void Dialog::SaveData()
     // Limpio las variables
           count_one=0;
           seconds=0;
+          prev_minute=curr_minute;
     }
 }
 //
@@ -653,4 +655,34 @@ void Dialog::on_pbSurvey_clicked()
 void Dialog::askGPS()
 {
     gps->SendTripleCMD();
+}
+
+void Dialog::on_pbShutdown_clicked()
+{
+    QString a;
+#ifdef Q_OS_WIN
+    a.append("shutdown -s -t 60");
+#endif
+//
+#ifdef Q_OS_LINUX
+    a.append("halt");
+#endif
+    process->startDetached(a);
+    a.detach();
+    logger->write("Shutting Down System");
+}
+
+void Dialog::on_pbReboot_clicked()
+{
+    QString a;
+#ifdef Q_OS_WIN
+    a.append("shutdown -r -t 60");
+#endif
+//
+#ifdef Q_OS_LINUX
+    a.append("reboot");
+#endif
+    process->startDetached(a);
+    a.detach();
+    logger->write("Rebooting System");
 }

@@ -93,7 +93,7 @@ signals:
     double gpsReady();
     //
 public slots:
-    void startGPS();
+    bool startGPS();
     void startGPS(QString PORTNAME);
     void readSerialGPS();
     void DemoMode();

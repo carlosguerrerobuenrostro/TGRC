@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="main">
     <widget class="QPushButton" name="btnFuegoNuevo">
@@ -576,30 +576,23 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="pbConfig">
         <property name="text">
-         <string>PushButton</string>
+         <string>Config</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_8">
+       <widget class="QPushButton" name="pbReboot">
         <property name="text">
-         <string>PushButton</string>
+         <string>Reboot</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_9">
+       <widget class="QPushButton" name="pbShutdown">
         <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_7">
-        <property name="text">
-         <string>PushButton</string>
+         <string>Shut Down</string>
         </property>
        </widget>
       </item>

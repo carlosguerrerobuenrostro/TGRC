@@ -19,7 +19,7 @@ M12MT::M12MT(QObject *parent) : QObject(parent)
 
 }
 
-void M12MT::startGPS(){
+bool M12MT::startGPS(){
     /*
     *   Identify the ports
     */
@@ -43,6 +43,9 @@ void M12MT::startGPS(){
     /*
     *  Open and configure the TIC port if available
     */
+
+   // GPS_is_available=false;
+
     if(GPS_is_available){
         //Serial Port TIC
         qDebug() << "Found the GPS" << GPS_port_name << endl;
@@ -55,6 +58,7 @@ void M12MT::startGPS(){
         connect(timer, SIGNAL(timeout()), this, SLOT(DemoMode()));
         timer->start(1000);
     }
+    return GPS_is_available;
 }
 
 void M12MT::startGPS(QString PORTNAME)
@@ -72,7 +76,6 @@ void M12MT::startGPS(QString PORTNAME)
     GPS->setFlowControl(QSerialPort::NoFlowControl);
     GPS->setParity(QSerialPort::NoParity);
     GPS->setStopBits(QSerialPort::OneStop);
-    DEMOmode=false;
     QObject::connect(GPS, SIGNAL(readyRead()), this, SLOT(readSerialGPS()));
 }
 
@@ -251,7 +254,6 @@ void M12MT::DemoMode()
     longitud=-100.258345;
     altitud=1917.16;
     //
-    DEMOmode=true;
     emit  gpsReady();
 }
 
