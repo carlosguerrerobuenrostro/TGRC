@@ -254,6 +254,20 @@ void M12MT::DemoMode()
     longitud=-100.258345;
     altitud=1917.16;
     //
+    nvs=12;
+    nts=12;
+    negative_sawtooth=7;
+    //
+    for (quint8 i=1;i<=nts;i++) {
+         SVID[i].mode=8;
+         SVID[i].elevation=(i*20)%90;
+         SVID[i].azimuth=(GPStime.minute()*i*2)%360;
+         int a=qrand()%((((200/10)+1)-0)+0);
+         SVID[i].fractional_GPS_time=100000*(GPStime.second()%10)+a;
+    }
+
+
+    //
     emit  gpsReady();
 }
 

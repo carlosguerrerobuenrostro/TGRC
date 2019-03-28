@@ -11,17 +11,17 @@
 #include <QNetworkInterface>
 #include <QDebug>
 //
-#include <QtCharts/QChartView>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QLegend>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QStackedBarSeries>
+//#include <QtCharts/QChartView>
+//#include <QtCharts/QBarSeries>
+//#include <QtCharts/QBarSet>
+//#include <QtCharts/QLegend>
+//#include <QtCharts/QBarCategoryAxis>
+//#include <QtCharts/QStackedBarSeries>
 //
 //
 Logger *Dialog::logger;
 //
-QT_CHARTS_USE_NAMESPACE
+//QT_CHARTS_USE_NAMESPACE
 
 
 Dialog::Dialog(QWidget *parent) :
